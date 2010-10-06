@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 //make sure you have the OpenCV project open, so that the
 //android-sdk can find it!
@@ -40,6 +41,33 @@ public class armskdemo extends Activity {
 	private NativePreviewer mPreview;
 	private GL2CameraViewer glview;
 	final Processor processor = new Processor();
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add("FAST");
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
+		defaultcallbackstack.addFirst(glview.getDrawCallback());
+		if (item.getTitle().equals("FAST")) {
+
+			defaultcallbackstack.addFirst(new FastProcessor());
+			Toast.makeText(this, "Detecting and Displaying FAST features",
+					Toast.LENGTH_LONG).show();
+		}
+
+		mPreview.addCallbackStack(defaultcallbackstack);
+		return true;
+	}
+	
+	@Override
+	public void onOptionsMenuClosed(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onOptionsMenuClosed(menu);
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,10 +103,11 @@ public class armskdemo extends Activity {
 		frame.addView(glview);
 
 		setContentView(frame);
-		LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
+		
+	/*LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
 		defaultcallbackstack.addFirst(glview.getDrawCallback());
 		defaultcallbackstack.addFirst(new FastProcessor());
-
+		mPreview.addCallbackStack(defaultcallbackstack);*/
     }
 	@Override
 	protected void onPause() {
