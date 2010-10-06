@@ -44,7 +44,7 @@ public class armskdemo extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add("FEATURE DETECT - FAST");
+		menu.add("FAST");
 		return true;
 	}
 	
