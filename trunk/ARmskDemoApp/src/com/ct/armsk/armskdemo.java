@@ -39,6 +39,7 @@ public class armskdemo extends Activity {
     /** Called when the activity is first created. */
 	private NativePreviewer mPreview;
 	private GL2CameraViewer glview;
+	final Processor processor = new Processor();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +125,7 @@ public class armskdemo extends Activity {
 
 	}
 	// final processor so taht these processor callbacks can access it
-	final Processor processor = new Processor();
+	//final Processor processor = new Processor();
 
 
 	class FastProcessor implements NativeProcessor.PoolCallback {
