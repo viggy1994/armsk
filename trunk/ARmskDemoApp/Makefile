@@ -60,7 +60,7 @@ $(SWIG_C_OUT): $(SWIG_IS)
 	make clean-swig &&\
 	mkdir -p $(SWIG_C_DIR) &&\
 	mkdir -p $(SWIG_JAVA_DIR) &&\
-	swig -java -c++ -I$(OPENCV_ROOT)/android/jni -package  "com.ct.armsk" \
+	swig -java -c++ -I$(OPENCV_ROOT)/android/jni -package  "com.ct.armsk.jni" \
 	-outdir $(SWIG_JAVA_DIR) \
 	-o $(SWIG_C_OUT) $(SWIG_MAIN)
 	

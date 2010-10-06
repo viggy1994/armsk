@@ -8,11 +8,6 @@ using namespace cv;
 %}
 
 
-/**
- * some constants, see Processor.h
- */
-#define DETECT_FAST 0
-
 //import the android-cv.i file so that swig is aware of all that has been previous defined
 //notice that it is not an include....
 %import "android-cv.i"

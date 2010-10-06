@@ -1,5 +1,5 @@
-/Users/yinfaichan/Documents/workspace/ARmskDemoApp/obj/local/armeabi/objs/armskdemoapp/gen/armskdemoapp_swig.o: \
- /Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/gen/armskdemoapp_swig.cpp \
+/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/obj/local/armeabi/objs/armskdemoapp/gen/armskdemoapp_swig.o: \
+ /Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/gen/armskdemoapp_swig.cpp \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/jni.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/stdlib.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/cdefs.h \
@@ -21,7 +21,7 @@
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/machine/kernel.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/sysmacros.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/memory.h \
- /Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/Processor.h \
+ /Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/Processor.h \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/types_c.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/assert.h \
@@ -89,7 +89,7 @@
 
 /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/memory.h:
 
-/Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/Processor.h:
+/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/Processor.h:
 
 ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp:
 

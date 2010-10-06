@@ -198,20 +198,7 @@ using namespace cv;
 extern "C" {
 #endif
 
-SWIGEXPORT jint JNICALL Java_com_ct_armsk_armskdemoappJNI_DETECT_1FAST_1get(JNIEnv *jenv, jclass jcls) {
-  jint jresult = 0 ;
-  int result;
-  
-  (void)jenv;
-  (void)jcls;
-  result = (int) 0;
-  
-  jresult = (jint)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT jlong JNICALL Java_com_ct_armsk_armskdemoappJNI_new_1Processor(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_new_1Processor(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Processor *result = 0 ;
   
@@ -223,7 +210,7 @@ SWIGEXPORT jlong JNICALL Java_com_ct_armsk_armskdemoappJNI_new_1Processor(JNIEnv
 }
 
 
-SWIGEXPORT void JNICALL Java_com_ct_armsk_armskdemoappJNI_delete_1Processor(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_delete_1Processor(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Processor *arg1 = (Processor *) 0 ;
   
   (void)jenv;
@@ -234,7 +221,7 @@ SWIGEXPORT void JNICALL Java_com_ct_armsk_armskdemoappJNI_delete_1Processor(JNIE
 }
 
 
-SWIGEXPORT void JNICALL Java_com_ct_armsk_armskdemoappJNI_Processor_1detectAndDrawFeatures(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_Processor_1detectAndDrawFeatures(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   Processor *arg1 = (Processor *) 0 ;
   int arg2 ;
   image_pool *arg3 = (image_pool *) 0 ;

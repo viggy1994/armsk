@@ -8,5 +8,5 @@
 
 package com.ct.armsk.jni;
 
-public class armskdemoapp implements armskdemoappConstants {
+public class armskdemoapp {
 }

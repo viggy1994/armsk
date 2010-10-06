@@ -39,7 +39,6 @@ public class armskdemo extends Activity {
     /** Called when the activity is first created. */
 	private NativePreviewer mPreview;
 	private GL2CameraViewer glview;
-	//final Processor processor = new Processor();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,7 +132,7 @@ public class armskdemo extends Activity {
 		@Override
 		public void process(int idx, image_pool pool, long timestamp,
 				NativeProcessor nativeProcessor) {
-			//processor.detectAndDrawFeatures(idx, pool);
+			processor.detectAndDrawFeatures(idx, pool);
 
 		}
 

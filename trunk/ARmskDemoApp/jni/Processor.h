@@ -13,8 +13,6 @@
 
 #include "image_pool.h"
 
-#define DETECT_FAST 0
-
 class Processor {
 
 	cv::FastFeatureDetector fastd;

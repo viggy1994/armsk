@@ -1,6 +1,6 @@
-/Users/yinfaichan/Documents/workspace/ARmskDemoApp/obj/local/armeabi/objs/armskdemoapp/Processor.o: \
- /Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/Processor.cpp \
- /Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/Processor.h \
+/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/obj/local/armeabi/objs/armskdemoapp/Processor.o: \
+ /Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/Processor.cpp \
+ /Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/Processor.h \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/types_c.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/assert.h \
@@ -51,7 +51,7 @@
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/endian.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/endian.h
 
-/Users/yinfaichan/Documents/workspace/ARmskDemoApp/jni/Processor.h:
+/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/Processor.h:
 
 ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp:
 

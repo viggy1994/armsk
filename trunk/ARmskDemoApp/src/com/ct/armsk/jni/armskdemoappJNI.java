@@ -30,7 +30,6 @@ class armskdemoappJNI {
 	}
 
 
-  public final static native int DETECT_FAST_get();
   public final static native long new_Processor();
   public final static native void delete_Processor(long jarg1);
   public final static native void Processor_detectAndDrawFeatures(long jarg1, Processor jarg1_, int jarg2, long jarg3, image_pool jarg3_);

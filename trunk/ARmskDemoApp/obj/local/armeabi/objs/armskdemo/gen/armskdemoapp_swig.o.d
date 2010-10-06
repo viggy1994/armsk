@@ -1,4 +1,4 @@
-/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/obj/local/armeabi-v7a/objs/armskdemoapp/gen/armskdemoapp_swig.o: \
+/Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/obj/local/armeabi/objs/armskdemo/gen/armskdemoapp_swig.o: \
  /Users/yinfaichan/justus/ARmskDemoApp/ARmskDemoApp/jni/gen/armskdemoapp_swig.cpp \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/jni.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/stdlib.h \
