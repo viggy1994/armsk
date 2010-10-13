@@ -3,16 +3,13 @@ package com.ct.armsk;
 import java.util.LinkedList;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
@@ -20,31 +17,29 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-//make sure you have the OpenCV project open, so that the
-//android-sdk can find it!
-
-//import com.foo.bar.FooBar.SpamProcessor;
+import com.ct.armsk.jni.Processor;
 import com.opencv.camera.NativePreviewer;
 import com.opencv.camera.NativeProcessor;
 import com.opencv.camera.NativeProcessor.PoolCallback;
 import com.opencv.jni.image_pool;
 import com.opencv.opengl.GL2CameraViewer;
-import com.ct.armsk.armskdemo.FastProcessor;
-import com.ct.armsk.jni.Processor;
-import com.ct.armsk.jni.armskdemoapp;
 
-import android.app.Activity;
-import android.os.Bundle;
+
 
 public class armskdemo extends Activity {
     /** Called when the activity is first created. */
 	private NativePreviewer mPreview;
 	private GL2CameraViewer glview;
 	final Processor processor = new Processor();
+	private SharedPreferences detectPref;
+	private int detection_method;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add("FAST");
+		menu.add("Settings");
+		menu.add("Add template");
+		menu.add("Start AR");
+		
 		return true;
 	}
 	
@@ -52,12 +47,29 @@ public class armskdemo extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
 		defaultcallbackstack.addFirst(glview.getDrawCallback());
-		if (item.getTitle().equals("FAST")) {
+		if (item.getTitle().equals("Start AR")) {
 
-			defaultcallbackstack.addFirst(new FastProcessor());
-			Toast.makeText(this, "Detecting and Displaying FAST features",
+			//defaultcallbackstack.addFirst(new FastProcessor());
+			defaultcallbackstack.addFirst(new ARProcessor());
+			Toast.makeText(this, "Initiate Augmented Reality",
 					Toast.LENGTH_LONG).show();
 		}
+		if (item.getTitle().equals("Settings")) {
+
+		Intent intent = new Intent(this, EditPreferences.class);
+		
+		startActivity(intent);
+		return (true);
+		
+		}
+		if (item.getTitle().equals("Add template")) {
+
+			Toast.makeText(this, "Template features added to the training set",
+					Toast.LENGTH_LONG).show();
+			
+		}
+		
+		
 
 		mPreview.addCallbackStack(defaultcallbackstack);
 		return true;
@@ -72,6 +84,12 @@ public class armskdemo extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    	
+    	
+    	detectPref = PreferenceManager.getDefaultSharedPreferences(this);
+    	detection_method =  Integer.parseInt(detectPref.getString("detectPref", ""));
+    	
+    	
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -104,10 +122,6 @@ public class armskdemo extends Activity {
 
 		setContentView(frame);
 		
-	/*LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
-		defaultcallbackstack.addFirst(glview.getDrawCallback());
-		defaultcallbackstack.addFirst(new FastProcessor());
-		mPreview.addCallbackStack(defaultcallbackstack);*/
     }
 	@Override
 	protected void onPause() {
@@ -124,12 +138,14 @@ public class armskdemo extends Activity {
 		mPreview.onPause();
 
 		glview.onPause();
-
+ 
 	}
 	@Override
 	protected void onResume() {
 		super.onResume();
 
+		detection_method =  Integer.parseInt(detectPref.getString("detectPref", ""));
+		
 		// resume the opengl viewer first
 	glview.onResume();
 
@@ -150,7 +166,7 @@ public class armskdemo extends Activity {
 		mPreview.addCallbackStack(cbstack);
 		mPreview.onResume();
 		
-		
+	
 
 	}
 	// final processor so taht these processor callbacks can access it
@@ -163,7 +179,19 @@ public class armskdemo extends Activity {
 		public void process(int idx, image_pool pool, long timestamp,
 				NativeProcessor nativeProcessor) {
 			processor.detectAndDrawFeatures(idx, pool);
+			
+		}
 
+	}
+	
+	class ARProcessor implements NativeProcessor.PoolCallback {
+
+		@Override
+		public void process(int idx, image_pool pool, long timestamp,
+				NativeProcessor nativeProcessor) {
+			processor.processAR(idx, pool, detection_method);
+			//processor.detectAndDrawFeatures(idx, pool);
+			
 		}
 
 	}

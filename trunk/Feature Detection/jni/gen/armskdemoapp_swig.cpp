@@ -221,6 +221,24 @@ SWIGEXPORT void JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_delete_1Processor(
 }
 
 
+SWIGEXPORT void JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_Processor_1processAR(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_, jint jarg4) {
+  Processor *arg1 = (Processor *) 0 ;
+  int arg2 ;
+  image_pool *arg3 = (image_pool *) 0 ;
+  int arg4 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  (void)jarg3_;
+  arg1 = *(Processor **)&jarg1; 
+  arg2 = (int)jarg2; 
+  arg3 = *(image_pool **)&jarg3; 
+  arg4 = (int)jarg4; 
+  (arg1)->processAR(arg2,arg3,arg4);
+}
+
+
 SWIGEXPORT void JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_Processor_1detectAndDrawFeatures(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   Processor *arg1 = (Processor *) 0 ;
   int arg2 ;

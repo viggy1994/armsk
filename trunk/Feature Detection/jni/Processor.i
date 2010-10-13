@@ -28,7 +28,7 @@ public:
 	virtual ~Processor();
 
 	
-	
+	void processAR(int input_idx, image_pool* pool, int detection_method);
 	void detectAndDrawFeatures(int idx, image_pool* pool);
 
 

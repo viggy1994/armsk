@@ -16,6 +16,9 @@
 class Processor {
 
 	cv::FastFeatureDetector fastd;
+	cv::GoodFeaturesToTrackDetector gfttd;
+	cv::StarFeatureDetector stard;
+	cv::SurfFeatureDetector surfd;
 	std::vector<cv::KeyPoint> keypoints;
 
 	//image_pool pool;
@@ -24,6 +27,7 @@ public:
 	Processor();
 	virtual ~Processor();
 	
+	void processAR(int idx, image_pool* pool, int detection_method);
 	void detectAndDrawFeatures(int idx, image_pool* pool);
 	
 };

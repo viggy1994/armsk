@@ -40,6 +40,10 @@ public class Processor {
     this(armskdemoappJNI.new_Processor(), true);
   }
 
+  public void processAR(int input_idx, image_pool pool, int detection_method) {
+    armskdemoappJNI.Processor_processAR(swigCPtr, this, input_idx, image_pool.getCPtr(pool), pool, detection_method);
+  }
+
   public void detectAndDrawFeatures(int idx, image_pool pool) {
     armskdemoappJNI.Processor_detectAndDrawFeatures(swigCPtr, this, idx, image_pool.getCPtr(pool), pool);
   }
