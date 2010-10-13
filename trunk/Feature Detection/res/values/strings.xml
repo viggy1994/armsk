@@ -2,20 +2,4 @@
 <resources>
     <string name="hello">Hello World, armskdemo!</string>
     <string name="app_name">ARmskDemo</string>
-    
-    <string name="detectmethod_prompt">Choose a detection method</string>
-    <string-array name="detection_array">
-        <item>FastFeatureDetection</item>
-        <item>GoodFeaturesToTrackDetection</item>
-        <item>StarFeatureDetection</item>
-        <item>SURFFeatureDetection</item>
-        <item>SIFTFeatureDetection</item>
-    </string-array>
-    
-    <string name="extractmethod_prompt">Choose a descriptor extraction method</string>
-    <string-array name="detection_array">
-        <item>SurfDescriptorExtractor</item>
-        <item>SiftDescriptorExtractor</item>
-    </string-array>
-    
 </resources>

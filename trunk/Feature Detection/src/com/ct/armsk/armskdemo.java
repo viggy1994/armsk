@@ -33,6 +33,7 @@ public class armskdemo extends Activity {
 	final Processor processor = new Processor();
 	private SharedPreferences detectPref;
 	private int detection_method;
+	boolean settingsChanged = false;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +58,7 @@ public class armskdemo extends Activity {
 		if (item.getTitle().equals("Settings")) {
 
 		Intent intent = new Intent(this, EditPreferences.class);
+		settingsChanged=true;
 		
 		startActivity(intent);
 		return (true);
@@ -87,10 +89,7 @@ public class armskdemo extends Activity {
     	
     	
     	detectPref = PreferenceManager.getDefaultSharedPreferences(this);
-    	detection_method =  Integer.parseInt(detectPref.getString("detectPref", ""));
     	
-    	
-
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -144,6 +143,7 @@ public class armskdemo extends Activity {
 	protected void onResume() {
 		super.onResume();
 
+		if(settingsChanged)
 		detection_method =  Integer.parseInt(detectPref.getString("detectPref", ""));
 		
 		// resume the opengl viewer first
