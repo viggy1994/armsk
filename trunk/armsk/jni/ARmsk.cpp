@@ -117,7 +117,8 @@ void ARmsk::processAR(int input_idx, image_pool* pool, int detection_method, con
 		//templateInitiated = false;
 
 		clearAll();
-
+		imagePoints.clear();
+		templatePoints3D.clear();
 	}
 	
 }
@@ -156,6 +157,7 @@ void ARmsk::clearAll(){
 	train.validIndexes.clear();
 	query.validIndexes.clear();
 	dst_corners.clear();
+
 }
 
 void ARmsk::match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matches){

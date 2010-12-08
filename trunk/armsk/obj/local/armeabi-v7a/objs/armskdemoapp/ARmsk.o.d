@@ -1,6 +1,6 @@
-/Users/yinfaichan/android-opencv/samples/FeatureDetection/obj/local/armeabi-v7a/objs/armskdemoapp/ARmsk.o: \
- /Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/ARmsk.cpp \
- /Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/ARmsk.h \
+/Users/yinfaichan/android-opencv/samples/armsk/obj/local/armeabi-v7a/objs/armskdemoapp/ARmsk.o: \
+ /Users/yinfaichan/android-opencv/samples/armsk/jni/ARmsk.cpp \
+ /Users/yinfaichan/android-opencv/samples/armsk/jni/ARmsk.h \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/types_c.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/assert.h \
@@ -52,7 +52,7 @@
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/endian.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/endian.h
 
-/Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/ARmsk.h:
+/Users/yinfaichan/android-opencv/samples/armsk/jni/ARmsk.h:
 
 ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp:
 

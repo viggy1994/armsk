@@ -56,6 +56,7 @@ class CubeRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 		//GLU.gluLookAt(gl, 0, 0, 4.2f, 0, 0, 0, 0, 1, 0);
+        gl.glTranslatef(0, 0, -6.0f);
 
         gl.glLoadMatrixf(homography, 0);
 

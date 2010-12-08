@@ -223,9 +223,9 @@ public class armskdemo extends Activity {
 		 * armsk.getElementRotationVector(i); } for(int i = 0; i < 3; i++){
 		 * transv[i] = armsk.getElementTranslateVector(i); }
 		 */
-		transform = new float[]{armsk.get_d(0), armsk.get_d(3), armsk.get_d(6), 0, 
-										armsk.get_d(1), armsk.get_d(4), armsk.get_d(7), 0,
-										armsk.get_d(2), armsk.get_d(5), armsk.get_d(8), 0,
+		transform = new float[]{armsk.getElementRotationMatrix(0, 0), -armsk.getElementRotationMatrix(1, 0), -armsk.getElementRotationMatrix(2,0), 0, 
+										armsk.getElementRotationMatrix(0, 1), -armsk.getElementRotationMatrix(1, 1), -armsk.getElementRotationMatrix(2,1), 0,
+										armsk.getElementRotationMatrix(0, 2), -armsk.getElementRotationMatrix(1, 2), -armsk.getElementRotationMatrix(2, 2), 0,
 										0, 0, 0, 1};
 		
 
