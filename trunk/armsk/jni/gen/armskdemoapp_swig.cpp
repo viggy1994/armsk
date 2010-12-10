@@ -750,6 +750,23 @@ SWIGEXPORT jfloat JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_ARmsk_1get_1d(JN
 }
 
 
+SWIGEXPORT jfloat JNICALL Java_com_ct_armsk_jni_armskdemoappJNI_ARmsk_1getMatrix(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  jfloat jresult = 0 ;
+  ARmsk *arg1 = (ARmsk *) 0 ;
+  int arg2 ;
+  float result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(ARmsk **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (float)(arg1)->getMatrix(arg2);
+  jresult = (jfloat)result; 
+  return jresult;
+}
+
+
 #ifdef __cplusplus
 }
 #endif

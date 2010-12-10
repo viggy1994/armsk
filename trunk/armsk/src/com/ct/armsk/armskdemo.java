@@ -52,6 +52,7 @@ public class armskdemo extends Activity {
 			0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1};
+	float[] eav = new float[3];
 
 	float rotv[] = { 0, 0, 0 };
 	float transv[] = { 0, 0, 0 };
@@ -223,27 +224,30 @@ public class armskdemo extends Activity {
 		 * armsk.getElementRotationVector(i); } for(int i = 0; i < 3; i++){
 		 * transv[i] = armsk.getElementTranslateVector(i); }
 		 */
-		transform = new float[]{armsk.getElementRotationMatrix(0, 0), -armsk.getElementRotationMatrix(1, 0), -armsk.getElementRotationMatrix(2,0), 0, 
-										armsk.getElementRotationMatrix(0, 1), -armsk.getElementRotationMatrix(1, 1), -armsk.getElementRotationMatrix(2,1), 0,
-										armsk.getElementRotationMatrix(0, 2), -armsk.getElementRotationMatrix(1, 2), -armsk.getElementRotationMatrix(2, 2), 0,
-										0, 0, 0, 1};
+		/*transform = new float[]{armsk.getElementRotationMatrix(0, 0), armsk.getElementRotationMatrix(1, 0), armsk.getElementRotationMatrix(2, 0), 0, 
+										armsk.getElementRotationMatrix(0, 1), armsk.getElementRotationMatrix(1, 1), armsk.getElementRotationMatrix(2,  1), 0,
+										armsk.getElementRotationMatrix(0, 2), armsk.getElementRotationMatrix(1, 2), armsk.getElementRotationMatrix(2, 2), 0,
+										0, 0, 0, 1};*/
 		
+		transform = new float[]{armsk.get_d(0), armsk.get_d(3), armsk.get_d(6), 0,
+								armsk.get_d(1), armsk.get_d(4), armsk.get_d(7), 0,
+								armsk.get_d(2), armsk.get_d(5), armsk.get_d(8), 0,
+								0, 0, 0, 1};
+		
+		eav = new float[]{armsk.getMatrix(0), armsk.getMatrix(1), armsk.getMatrix(2)};
 
-		 
-	
-/*		transform[0] = armsk.get_d(0);
-		transform[1] = armsk.get_d(3);
-		 transform[2] = armsk.get_d(6);
-		 transform[3] = 0;
-		 transform[4] = armsk.get_d(1);
-		 transform[5] = armsk.get_d(4);
-		 transform[6] = armsk.get_d(7);
-		 transform[7] = 0;
-		 transform[8] = armsk.get_d(2);
-		 transform[9] = armsk.get_d(5);
-		 transform[10] = armsk.get_d(8);
-		 transform[11] = 0;
-		 transform[12] = armsk.get_d(12);
+		/*float maximum = transform[0];   // start with the first value
+	    for (int i=1; i<transform.length; i++) {
+	        if (transform[i] > maximum) {
+	            maximum = transform[i];   // new maximum
+	        }
+	    }
+	    
+	    for (int i=0; i<transform.length; i++) {
+	    	transform[i] /= maximum;   // normalized       
+	    }*/
+
+/*
 		
 
 		transform[13] = 0;//armsk.getElementTranslateVector(0);
@@ -278,7 +282,17 @@ public class armskdemo extends Activity {
 
 			armsk.processAR(idx, pool, detection_method, path);
 			buildMatrix();
-			arRenderer.updateHomography(transform);
+			
+			/*float maximum = transform[0];   // start with the first value
+		    for (int i=1; i<transform.length; i++) {
+		        if (transform[i] > maximum) {
+		            maximum = transform[i];   // new maximum
+		        }
+		    }
+
+			armsk.drawText(idx, pool, " "+maximum);*/
+			
+			arRenderer.updateHomography(transform, eav); 
 			// arRenderer.updateRotation(rotv);
 			/*
 			 * armsk.drawText(idx, pool, " HMatrix:  " + armsk.getElement(0,0) +

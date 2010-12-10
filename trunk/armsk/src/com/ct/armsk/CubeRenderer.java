@@ -35,6 +35,7 @@ class CubeRenderer implements GLSurfaceView.Renderer {
 			0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1};
+    float[] euler = new float[3];
     public CubeRenderer(boolean useTranslucentBackground) {
         mTranslucentBackground = useTranslucentBackground;
         mCube = new Cube();
@@ -56,15 +57,17 @@ class CubeRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
 		//GLU.gluLookAt(gl, 0, 0, 4.2f, 0, 0, 0, 0, 1, 0);
-        gl.glTranslatef(0, 0, -6.0f);
 
-        gl.glLoadMatrixf(homography, 0);
+        //gl.glLoadMatrixf(homography, 0);
+        gl.glTranslatef(0, 0, -3.0f);
+        gl.glRotatef(euler[2], 0, 0, 1.0f);
+        gl.glRotatef(euler[1], 0, 1.0f, 0); 
+        gl.glRotatef(euler[0], 1.0f, 0, 0);
 
 
-        gl.glTranslatef(0, 0, -6.0f);
-        gl.glRotatef(50, 1, 0, 0);
+//        gl.glRotatef(50, 1, 0, 0);
 
-        gl.glRotatef(20, 0, 1, 1);
+//        gl.glRotatef(20, 0, 1, 1);
         //gl.glTranslatef(rotation[0], rotation[1], rotation[2]);
         //gl.glRotatef(mAngle,        0, 1, 0);
         //gl.glRotatef(mAngle*0.25f,  0, 0, 1);
@@ -78,11 +81,8 @@ class CubeRenderer implements GLSurfaceView.Renderer {
 
 
         mCube.draw(gl);
-
-        mAngle += 1.2f;  
         
-        
-        
+                
         //gl.glRotatef(mAngle*2.0f, 0, 0, 1);
         //gl.glTranslatef(0.5f, 0.5f, 0.5f);
 
@@ -139,7 +139,7 @@ class CubeRenderer implements GLSurfaceView.Renderer {
     //boolean newMatrix = false;
     FloatBuffer fbuffer = FloatBuffer.allocate(1024);
 
-	public void updateHomography(float[] transform) {
+	public void updateHomography(float[] transform, float[] eav) {
 		/*newMatrix = true;
 		int k = 0;
 		for(int i = 0; i < 4; i=i+1){
@@ -154,6 +154,7 @@ class CubeRenderer implements GLSurfaceView.Renderer {
 				}
 			}
 		}*/
+		euler = eav; 
 		homography = transform;
 		//newMatrix = true;
 	}

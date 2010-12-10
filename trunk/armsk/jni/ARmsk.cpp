@@ -45,6 +45,8 @@ Mat rvec(rv), tvec(tv);
 double _d[9] = {1,0,0,0,1,0,0,0,1};
 Mat rMat(3,3,CV_64FC1,_d);;
 
+
+Vec3d eav;
 ARmsk::~ARmsk() {
 	// TODO Auto-generated destructor stub
 }
@@ -102,6 +104,14 @@ void ARmsk::processAR(int input_idx, image_pool* pool, int detection_method, con
 			}
 			myFile << endl;
 		}
+
+		myFile << endl;
+		myFile << "Euler Angles" << endl;
+		for(int i = 0; i < 3; i++){
+				myFile << " " << eav[i] << " ";
+			}
+		myFile << endl;
+
 
 		myFile << endl;
 		myFile << "Homography matrix" << endl;
@@ -283,8 +293,12 @@ void ARmsk::computeProjection(vector<Point3f> &objectPoints, vector<Point2f> &im
 
 	double _dc[] = {0,0,0,0};
 
-	double _cm[9] = { 20, 0, 400,
-		           0, 20, 240,
+/*	double _cm[9] = { 240, 0, 120,
+		           0, 240, 200,
+		             0,  0,   1 };*/
+
+	double _cm[9] = { 400, 0, 200,
+		           0, 400, 120,
 		             0,  0,   1 };
 
 	Mat camMatrix = Mat(3,3,CV_64FC1,_cm);
@@ -308,11 +322,11 @@ void ARmsk::computeProjectionD(vector<Point3d> &objectPoints, vector<Point2f> &i
 	//tvec = Mat(tv);
 
 
-	double _dc[] = {0,0,0,0};
+	double _dc[] = {0.076940, -0.051658, 0.0020525, -0.002528, -0.19178};
 
-	double _cm[9] = { 20, 0, 400,
-		           0, 20, 240,
-		             0,  0,   1 };
+	double _cm[9] = {318.102, 0, 201.277,
+						0, 318.802, 126.066,
+							0, 0, 1};
 
 	Mat camMatrix = Mat(3,3,CV_64FC1,_cm);
 
@@ -322,6 +336,11 @@ void ARmsk::computeProjectionD(vector<Point3d> &objectPoints, vector<Point2f> &i
 
 	Rodrigues(rvec,rMat);
 
+	double _pm[12] = {rMat.at<float>(0,0), rMat.at<float>(0,1), rMat.at<float>(0,2), 0,
+						rMat.at<float>(1,0), rMat.at<float>(1,1), rMat.at<float>(1,2),  0,
+						rMat.at<float>(2,0), rMat.at<float>(2,1), rMat.at<float>(2,2), 0};
+	Mat tmp, tmp2, tmp3, tmp4, tmp5, tmp6;
+	decomposeProjectionMatrix(Mat(3, 4, CV_64FC1, _pm),tmp, tmp2, tmp3, tmp4, tmp5, tmp6, eav);
 }
 
 
@@ -445,6 +464,11 @@ float ARmsk::get_d(int i){
 	return _d[i];
 
 	}
+
+float ARmsk::getMatrix(int i ) {
+	return eav[i];
+       }
+
 
 
 /*

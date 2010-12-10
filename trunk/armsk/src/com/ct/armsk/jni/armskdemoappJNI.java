@@ -58,4 +58,5 @@ class armskdemoappJNI {
   public final static native int ARmsk_getNumberTemplateDescriptors(long jarg1, ARmsk jarg1_);
   public final static native void ARmsk_initCorners(long jarg1, ARmsk jarg1_);
   public final static native float ARmsk_get_d(long jarg1, ARmsk jarg1_, int jarg2);
+  public final static native float ARmsk_getMatrix(long jarg1, ARmsk jarg1_, int jarg2);
 }

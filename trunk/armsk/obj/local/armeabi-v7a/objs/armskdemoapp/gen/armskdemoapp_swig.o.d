@@ -1,5 +1,5 @@
-/Users/yinfaichan/android-opencv/samples/FeatureDetection/obj/local/armeabi-v7a/objs/armskdemoapp/gen/armskdemoapp_swig.o: \
- /Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/gen/armskdemoapp_swig.cpp \
+/Users/yinfaichan/android-opencv/samples/armsk/obj/local/armeabi-v7a/objs/armskdemoapp/gen/armskdemoapp_swig.o: \
+ /Users/yinfaichan/android-opencv/samples/armsk/jni/gen/armskdemoapp_swig.cpp \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/jni.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/stdlib.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/cdefs.h \
@@ -21,7 +21,7 @@
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/machine/kernel.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/sys/sysmacros.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/memory.h \
- /Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/ARmsk.h \
+ /Users/yinfaichan/android-opencv/samples/armsk/jni/ARmsk.h \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp \
  ../../../android-opencv/opencv//modules/core/include/opencv2/core/types_c.h \
  /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/assert.h \
@@ -90,7 +90,7 @@
 
 /Users/yinfaichan/android-ndk-r4-crystax/build/platforms/android-5/arch-arm/usr/include/memory.h:
 
-/Users/yinfaichan/android-opencv/samples/FeatureDetection/jni/ARmsk.h:
+/Users/yinfaichan/android-opencv/samples/armsk/jni/ARmsk.h:
 
 ../../../android-opencv/opencv//modules/core/include/opencv2/core/core.hpp:
 

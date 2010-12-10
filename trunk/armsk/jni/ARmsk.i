@@ -83,7 +83,7 @@ public:
 	*/
 	
 	float get_d(int i);
-	
+	float getMatrix(int i);
 	
 	
 	

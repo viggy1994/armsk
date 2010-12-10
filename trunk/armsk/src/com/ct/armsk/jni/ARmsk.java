@@ -145,4 +145,8 @@ public class ARmsk {
     return armskdemoappJNI.ARmsk_get_d(swigCPtr, this, i);
   }
 
+  public float getMatrix(int i) {
+    return armskdemoappJNI.ARmsk_getMatrix(swigCPtr, this, i);
+  }
+
 }

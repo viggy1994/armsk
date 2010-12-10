@@ -81,7 +81,7 @@ public:
 	
 	int getNumberTemplateKeypoints();
 	int getNumberTemplateDescriptors();
-
+	float getMatrix(int i);
 	float get_d(int i);
 	
 
