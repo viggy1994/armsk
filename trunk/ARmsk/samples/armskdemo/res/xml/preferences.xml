@@ -1,0 +1,16 @@
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="Settings">
+	
+	
+	<ListPreference android:id="@+id/detectList" android:title="Detection method"
+		android:summary="Choose which feature detection method that will be used" android:key="detectPref" />
+	<CheckBoxPreference android:key="displayFeaturesKey" android:id="@+id/displayFeaturesKey"
+		android:title="Display features" android:persistent="true"  android:summary="Draws found features on the display"/>
+	<CheckBoxPreference android:key="displayKeypointsKey" android:id="@+id/displayKeypointsKey"
+		android:title="Keypoint counter" android:persistent="true"  android:summary="Draws the sum of found keypoints for each frame"/>		
+	<ListPreference android:id="@+id/extractList" android:title="Extraction method"
+		android:summary="Choose which descriptor extraction method that will be used" android:key="extractPref" />
+	
+
+</PreferenceScreen>
