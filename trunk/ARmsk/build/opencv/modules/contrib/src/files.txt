@@ -1,8 +1,0 @@
-adaptiveskindetector.cpp \
-ba.cpp \
-fuzzymeanshifttracker.cpp \
-octree.cpp \
-precomp.cpp \
-quadsubpix.cpp \
-selfsimilarity.cpp \
-spinimages.cpp
