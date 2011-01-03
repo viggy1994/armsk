@@ -18,7 +18,7 @@
 		android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden|keyboard">
 		</activity>
 
-		<activity android:name=".AR">
+		<activity android:name=".AR" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden|keyboard">
 		</activity>
 
 		<activity android:name=".Instructions" android:label="@string/instructions_label"

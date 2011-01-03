@@ -28,6 +28,7 @@ namespace ARmsk
 	
 	//Image management
 	void loadImage(IMAGEDATA &input, int input_idx, image_pool* pool);
+	void loadImage(IMAGEDATA &input, const char * filePath);
 	
 	//Processing
 	void detectKeypoints(IMAGEDATA &input, FeatureDetector* detector);

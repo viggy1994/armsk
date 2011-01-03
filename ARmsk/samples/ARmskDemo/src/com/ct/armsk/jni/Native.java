@@ -41,16 +41,20 @@ public class Native {
     this(armskdemoappJNI.new_Native(), true);
   }
 
-  public void processAR(int input_idx, image_pool pool, int detection_method, String filename) {
-    armskdemoappJNI.Native_processAR(swigCPtr, this, input_idx, image_pool.getCPtr(pool), pool, detection_method, filename);
+  public void processAR(int input_idx, image_pool pool) {
+    armskdemoappJNI.Native_processAR(swigCPtr, this, input_idx, image_pool.getCPtr(pool), pool);
   }
 
   public void match(SWIGTYPE_p_IMAGEDATA trainData, SWIGTYPE_p_IMAGEDATA queryData, SWIGTYPE_p_vectorTint_t matches) {
     armskdemoappJNI.Native_match(swigCPtr, this, SWIGTYPE_p_IMAGEDATA.getCPtr(trainData), SWIGTYPE_p_IMAGEDATA.getCPtr(queryData), SWIGTYPE_p_vectorTint_t.getCPtr(matches));
   }
 
-  public void setTemplate(int input_idx, image_pool pool) {
-    armskdemoappJNI.Native_setTemplate(swigCPtr, this, input_idx, image_pool.getCPtr(pool), pool);
+  public void setMarker(int input_idx, image_pool pool) {
+    armskdemoappJNI.Native_setMarker__SWIG_0(swigCPtr, this, input_idx, image_pool.getCPtr(pool), pool);
+  }
+
+  public void setMarker(String filePath) {
+    armskdemoappJNI.Native_setMarker__SWIG_1(swigCPtr, this, filePath);
   }
 
   public void saveMarker(int input_idx, image_pool pool, String filePath) {

@@ -18,11 +18,14 @@ public:
 	Native();
 	virtual ~Native();
 	
-	void processAR(int idx, image_pool* pool, int detection_method, const char* filename);
+	//void processAR(int idx, image_pool* pool, int detection_method, const char* filename);
+	void processAR(int input_idx, image_pool* pool);
 	
 	void match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matches);
 	
-	void setTemplate(int input_idx, image_pool* pool);
+	void setMarker(int input_idx, image_pool* pool);
+    void setMarker(const char * filePath);
+	
 	void saveMarker(int input_idx, image_pool* pool, const char * filePath );
 
 	void clearAll();
