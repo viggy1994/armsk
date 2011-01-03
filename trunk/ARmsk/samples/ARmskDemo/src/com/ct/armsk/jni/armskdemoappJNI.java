@@ -32,9 +32,10 @@ class armskdemoappJNI {
 
   public final static native long new_Native();
   public final static native void delete_Native(long jarg1);
-  public final static native void Native_processAR(long jarg1, Native jarg1_, int jarg2, long jarg3, image_pool jarg3_, int jarg4, String jarg5);
+  public final static native void Native_processAR(long jarg1, Native jarg1_, int jarg2, long jarg3, image_pool jarg3_);
   public final static native void Native_match(long jarg1, Native jarg1_, long jarg2, long jarg3, long jarg4);
-  public final static native void Native_setTemplate(long jarg1, Native jarg1_, int jarg2, long jarg3, image_pool jarg3_);
+  public final static native void Native_setMarker__SWIG_0(long jarg1, Native jarg1_, int jarg2, long jarg3, image_pool jarg3_);
+  public final static native void Native_setMarker__SWIG_1(long jarg1, Native jarg1_, String jarg2);
   public final static native void Native_saveMarker(long jarg1, Native jarg1_, int jarg2, long jarg3, image_pool jarg3_, String jarg4);
   public final static native void Native_clearAll(long jarg1, Native jarg1_);
   public final static native float Native_getMatrix(long jarg1, Native jarg1_, int jarg2);

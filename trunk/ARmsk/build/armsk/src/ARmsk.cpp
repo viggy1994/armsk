@@ -8,6 +8,11 @@ namespace ARmsk
 		pool->getGrey(input_idx, input.image);
 	}
 	
+	void loadImage(IMAGEDATA &input, const char * filePath){
+		Mat imageFile = imread(filePath);
+		cvtColor(imageFile, input.image, CV_RGB2GRAY);
+	}
+	
 	void detectKeypoints(IMAGEDATA &input, FeatureDetector* detector){
 		detector->detect(input.image, input.keypoints);
 	}

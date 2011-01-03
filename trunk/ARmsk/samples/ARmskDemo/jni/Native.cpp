@@ -51,84 +51,84 @@ Native::~Native() {
 	// TODO Auto-generated destructor stub
 }
 
-void Native::processAR(int input_idx, image_pool* pool, int detection_method, const char* filename) {
+void Native::processAR(int input_idx, image_pool* pool) { //, int detection_method, const char* filename) {
 	
 	if(templateInitiated){
 		
-	FeatureDetector* detector = &surfd;
-	DescriptorExtractor* descriptorExtractor = &surfe;
-	
-	loadImage(query, input_idx, pool);
-	detectKeypoints(query, detector);
-	computeDescriptors(query, descriptorExtractor);
-	
-	match(train, query, matches); 
-	convertToPoints(train,templatePoints);
-	convertToPoints(query,framePoints);	
-	computeHomography(templatePoints,framePoints, HMatrix);
-	
-	vector<Point2f> imagePoints;
-	transformPoints(HMatrix, src_corners, imagePoints);
-	drawMatchResult(input_idx,pool, imagePoints);
-	
-	vector<Point3d> objectPoints;
-	convertTo3D(src_corners, objectPoints);	
+		FeatureDetector* detector = &surfd;
+		DescriptorExtractor* descriptorExtractor = &surfe;
 		
-	estimatePose(objectPoints, imagePoints, _dc, _cm, _d, rvec, tvec, eav);
-	
-	//DEBUGGING
-	
-	/*myFile.open("/sdcard/test.txt");
-	
-	myFile << "Object points" << endl;
-	for(int i = 0; i < objectPoints.size(); i++){
-		myFile << " " << objectPoints[i].x << " - " << objectPoints[i].y << " - " << objectPoints[i].z << endl;
-	}
-	myFile << endl;
-	myFile << "Image points" << endl;
-	for(int i = 0; i < imagePoints.size(); i++){
-		myFile << " " << imagePoints[i].x << " - " << imagePoints[i].y << endl;
-	}
-	myFile << endl;
-	myFile << "Rotation vector" << endl;
-	for(int i = 0; i < rvec.rows; i++){
-		myFile << " " << rvec.at<float>(i,0) << endl;
-	}
-	myFile << endl;
-	myFile << "Translation vector" << endl;
-	
-	for(int i = 0; i < tvec.rows; i++){
-		myFile << " " << tvec.at<float>(i,0) << endl;
-	}
-	myFile << endl;
-	myFile << "Rotation matrix" << endl;
-	for(int i = 0; i < rMat.rows; i++){
-		for(int j = 0; j < rMat.cols; j++){
-			myFile << " " << rMat.at<float>(i,j) << " ";
-		}
-		myFile << endl;
-	}
-	
-	myFile << endl;
-	myFile << "Euler Angles" << endl;
-	for(int i = 0; i < 3; i++){
-		myFile << " " << eav[i] << " ";
-	}
-	myFile << endl;
-	
-	
-	myFile << endl;
-	myFile << "Homography matrix" << endl;
-	for(int i = 0; i < HMatrix.rows; i++){
-		for(int j = 0; j < HMatrix.cols; j++){
-			myFile << " " << HMatrix.at<float>(i,j) << " ";
-		}
-		myFile << endl;
-	}
-	*/
-	
-	clearAll();
-	//templateInitiated = false;
+		loadImage(query, input_idx, pool);
+		detectKeypoints(query, detector);
+		computeDescriptors(query, descriptorExtractor);
+		
+		match(train, query, matches); 
+		convertToPoints(train,templatePoints);
+		convertToPoints(query,framePoints);	
+		computeHomography(templatePoints,framePoints, HMatrix);
+		
+		vector<Point2f> imagePoints;
+		transformPoints(HMatrix, src_corners, imagePoints);
+		drawMatchResult(input_idx,pool, imagePoints);
+		
+		vector<Point3d> objectPoints;
+		convertTo3D(src_corners, objectPoints);	
+		
+		estimatePose(objectPoints, imagePoints, _dc, _cm, _d, rvec, tvec, eav);
+		
+		//DEBUGGING
+		
+		/*myFile.open("/sdcard/test.txt");
+		 
+		 myFile << "Object points" << endl;
+		 for(int i = 0; i < objectPoints.size(); i++){
+		 myFile << " " << objectPoints[i].x << " - " << objectPoints[i].y << " - " << objectPoints[i].z << endl;
+		 }
+		 myFile << endl;
+		 myFile << "Image points" << endl;
+		 for(int i = 0; i < imagePoints.size(); i++){
+		 myFile << " " << imagePoints[i].x << " - " << imagePoints[i].y << endl;
+		 }
+		 myFile << endl;
+		 myFile << "Rotation vector" << endl;
+		 for(int i = 0; i < rvec.rows; i++){
+		 myFile << " " << rvec.at<float>(i,0) << endl;
+		 }
+		 myFile << endl;
+		 myFile << "Translation vector" << endl;
+		 
+		 for(int i = 0; i < tvec.rows; i++){
+		 myFile << " " << tvec.at<float>(i,0) << endl;
+		 }
+		 myFile << endl;
+		 myFile << "Rotation matrix" << endl;
+		 for(int i = 0; i < rMat.rows; i++){
+		 for(int j = 0; j < rMat.cols; j++){
+		 myFile << " " << rMat.at<float>(i,j) << " ";
+		 }
+		 myFile << endl;
+		 }
+		 
+		 myFile << endl;
+		 myFile << "Euler Angles" << endl;
+		 for(int i = 0; i < 3; i++){
+		 myFile << " " << eav[i] << " ";
+		 }
+		 myFile << endl;
+		 
+		 
+		 myFile << endl;
+		 myFile << "Homography matrix" << endl;
+		 for(int i = 0; i < HMatrix.rows; i++){
+		 for(int j = 0; j < HMatrix.cols; j++){
+		 myFile << " " << HMatrix.at<float>(i,j) << " ";
+		 }
+		 myFile << endl;
+		 }
+		 */
+		
+		clearAll();
+		//templateInitiated = false;
 	}
 	
 	
@@ -140,20 +140,20 @@ void Native::clearAll(){
 	framePoints.clear();
 	dst_corners.clear();
 	clear(query);
-
+	
 }
- 
-void Native::match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matches){
 
+void Native::match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matches){
+	
 	// find nearest neighbors using FLANN
 	cv::Mat m_indices(trainData.descriptors.rows, 2, CV_32S);
 	cv::Mat m_dists(trainData.descriptors.rows, 2, CV_32F);
-
+	
 	// Using 4 randomized kdtrees
 	cv::flann::Index flann_index(queryData.descriptors, cv::flann::KDTreeIndexParams(4));
 	// Maximum number of leafs checked
 	flann_index.knnSearch(trainData.descriptors, m_indices, m_dists, 2, cv::flann::SearchParams(64));
-
+	
 	trainData.validIndexes.clear();
 	queryData.validIndexes.clear();
 	
@@ -169,7 +169,7 @@ void Native::match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matc
 	}
 }
 
-void Native::setTemplate(int input_idx, image_pool* pool) {
+void Native::setMarker(int input_idx, image_pool* pool) {
 	
 	FeatureDetector* detector = &surfd;
 	DescriptorExtractor* descriptorExtractor = &surfe;
@@ -177,7 +177,20 @@ void Native::setTemplate(int input_idx, image_pool* pool) {
 	loadImage(train, input_idx, pool);
 	detectKeypoints(train, detector);
 	computeDescriptors(train, descriptorExtractor);
+	
+	initCorners(train, src_corners);
+	templateInitiated = true;
+}
 
+void Native::setMarker(const char * filePath ) {
+	
+	FeatureDetector* detector = &surfd;
+	DescriptorExtractor* descriptorExtractor = &surfe;
+	
+	loadImage(train, filePath);
+	detectKeypoints(train, detector);
+	computeDescriptors(train, descriptorExtractor);
+	
 	initCorners(train, src_corners);
 	templateInitiated = true;
 }
@@ -187,52 +200,52 @@ void Native::saveMarker(int input_idx, image_pool* pool, const char * filePath )
 	imwrite(filePath, *img);
 }
 /*
-void ARmsk::loadTemplate(const char* filename) {
-
-	Mat templateRaw = imread(filename);
-	cvtColor(templateRaw, train.image, CV_RGB2GRAY);
-
-	detectKeypoints(train);
-	computeDescriptors(train);
-
-	initCorners();
-	templateInitiated = true;
-}
-
-
-/*
-int ARmsk::getNumberTemplateKeypoints() {
-	return train.keypoints.size();
-}
-
-int ARmsk::getNumberTemplateDescriptors() {
-	return train.descriptors.rows;
-}
-
-
-
-
-float ARmsk::getElementRotationVector(int i){
-	return rvec.at<float>(i,0);
-}
-
-float ARmsk::getElementTranslateVector(int i){
-	return tvec.at<float>(i,0);
-
-}
-
-float ARmsk::getElementRotationMatrix(int i, int j){
-	return rMat.at<float>(i,j);
-}
-
-float ARmsk::get_d(int i){
-	return _d[i];
-
-	}
-
-
-
-*/
+ void ARmsk::loadTemplate(const char* filename) {
+ 
+ Mat templateRaw = imread(filename);
+ cvtColor(templateRaw, train.image, CV_RGB2GRAY);
+ 
+ detectKeypoints(train);
+ computeDescriptors(train);
+ 
+ initCorners();
+ templateInitiated = true;
+ }
+ 
+ 
+ /*
+ int ARmsk::getNumberTemplateKeypoints() {
+ return train.keypoints.size();
+ }
+ 
+ int ARmsk::getNumberTemplateDescriptors() {
+ return train.descriptors.rows;
+ }
+ 
+ 
+ 
+ 
+ float ARmsk::getElementRotationVector(int i){
+ return rvec.at<float>(i,0);
+ }
+ 
+ float ARmsk::getElementTranslateVector(int i){
+ return tvec.at<float>(i,0);
+ 
+ }
+ 
+ float ARmsk::getElementRotationMatrix(int i, int j){
+ return rMat.at<float>(i,j);
+ }
+ 
+ float ARmsk::get_d(int i){
+ return _d[i];
+ 
+ }
+ 
+ 
+ 
+ */
 
 float Native::getMatrix(int i) {
 	return eav[i];
