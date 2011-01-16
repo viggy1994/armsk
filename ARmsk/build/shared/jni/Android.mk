@@ -1,18 +1,20 @@
-# date: Summer, 2010 
-# author: Ethan Rublee
-# contact: ethan.rublee@gmail.com
-#
+ # Copyright 2010, 2011 Project ARmsk
+ # 
+ # This file is part of ARmsk.
+ # ARmsk is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ # ARmsk is distributed in the hope that it will be useful, 
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ # You should have received a copy of the GNU General Public License
+ # along with ARmsk.  If not, see <http://www.gnu.org/licenses/>.
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-
-#pass in OPENCV_ROOT or define it here
-#OPENCV_ROOT := ~/android-opencv/opencv
-
-ifndef OPENCV_ROOT
-OPENCV_ROOT := /home/ethan/workspace/googlecode_android_opencv/opencv
-endif
-#OPENCV_LIBS_DIR := $(OPENCV_ROOT)/bin/ndk/local/armeabi
 
 #define OPENCV_INCLUDES
 include $(OPENCV_ROOT)/includes.mk

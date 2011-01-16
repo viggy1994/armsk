@@ -1,3 +1,19 @@
+/*
+ * Copyright 2010, 2011 Project ARmsk
+ * 
+ * This file is part of ARmsk.
+ * ARmsk is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * ARmsk is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with ARmsk.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 
 #ifndef ARMSK_H_
 #define ARMSK_H_
@@ -36,8 +52,9 @@ namespace ARmsk
 	//void match(IMAGEDATA &trainData, IMAGEDATA &queryData, vector<int> &matches);
 	void computeHomography(vector<Point2f> &pointSet1, vector<Point2f> &pointSet2, Mat &homography);
 	void transformPoints(Mat &HMatrix, vector<Point2f> &srcPoints, vector<Point2f> &dstPoints);
-	void estimatePose(vector<Point3d> &objectPoints, vector<Point2f> &imagePoints, double (&_dc)[5],
-					  double (&_cm)[9], double (&_d)[9], Mat &rvec, Mat &tvec, Vec3d &eav);
+	void prepareValuesForPoseEstimation(IMAGEDATA templateImage, Mat homography, vector<Point3d> &modelPoints, vector<Point2f> &imagePoints, Point2f &centerPoint);
+	void estimatePose(vector<Point3d> modelPoints, vector<Point2f> imagePoints, Point2f centerPoint, double (cameraMatrix)[16], double (&resultMatrix)[16]);
+	float calculateScale(vector<Point2f> imagePoints, float squareSize);
 	
 	//Convertions
 	void convertToPoints(IMAGEDATA &input, vector<Point2f> &points);
