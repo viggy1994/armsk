@@ -1,3 +1,20 @@
+
+/*
+ * Copyright 2010, 2011 Project ARmsk
+ * 
+ * This file is part of ARmsk.
+ * ARmsk is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * ARmsk is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with ARmsk.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.ct.armsk.demo;
 
 import java.io.File;
@@ -5,16 +22,19 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -33,12 +53,13 @@ public class Marker extends Activity{
 	Native armsk = new Native();
 	String markerPath = "";
 	boolean markerSaved = false;
-
+	Context test = this;
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add("Add Marker");
-		//menu.add("How-To & Tips");
+		menu.add("Settings");
+		menu.add("How-To & Tips");
 
 		return true;
 	}
@@ -58,8 +79,8 @@ public class Marker extends Activity{
 
 		if (item.getTitle().equals("How-To & Tips")) {
 			
-			Intent j = new Intent(this, AddMarkerHelp.class);
-			startActivity(j);
+			//Intent j = new Intent(this, AddMarkerHelp.class);
+			//startActivity(j);
 			
 			//Toast.makeText(this, "Initiate Augmented Reality", Toast.LENGTH_LONG).show();
 //			mPreview.addCallbackStack(defaultcallbackstack);
@@ -77,7 +98,7 @@ public class Marker extends Activity{
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		FrameLayout frame = new FrameLayout(this);
-
+		
 		// Create our Preview view and set it as the content of our activity.
 		mPreview = new NativePreviewer(getApplication(), 400, 400);
 
@@ -100,7 +121,36 @@ public class Marker extends Activity{
 		glview.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT));
 		frame.addView(glview);
-
+		
+		ImageButton addMarkerButton = new ImageButton(getApplicationContext());
+		addMarkerButton.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_menu_camera));
+		addMarkerButton.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT));
+		addMarkerButton.setOnClickListener(new View.OnClickListener() {
+			
+			
+			@Override
+			public void onClick(View v) {
+				
+				LinkedList<PoolCallback> defaultcallbackstack = new LinkedList<PoolCallback>();
+				defaultcallbackstack.addFirst(glview.getDrawCallback());
+				
+				defaultcallbackstack.addFirst(new MarkerProcessor());
+				mPreview.addCallbackStack(defaultcallbackstack);
+				
+			}
+		});
+		
+		LinearLayout buttons = new LinearLayout(getApplicationContext());
+		buttons.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT));
+		
+		
+	
+		buttons.addView(addMarkerButton);
+		
+		frame.addView(buttons);
+		
 		setContentView(frame);
 
 	}
@@ -108,14 +158,6 @@ public class Marker extends Activity{
 	protected void onPause() {
 		super.onPause();
 
-		// IMPORTANT
-		// must tell the NativePreviewer of a pause
-		// and the glview - so that they can release resources and start back up
-		// properly
-		// failing to do this will cause the application to crash with no
-		// warning
-		// on restart
-		// clears the callback stack
 		mPreview.onPause();
 		glview.onPause();
 
@@ -124,20 +166,11 @@ public class Marker extends Activity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// resume the opengl viewer first
+
 		glview.onResume();
-		// add an initial callback stack to the preview on resume...
-		// this one will just draw the frames to opengl
+
 		LinkedList<NativeProcessor.PoolCallback> cbstack = new LinkedList<PoolCallback>();
 
-		// SpamProcessor will be called first
-		// cbstack.add(new SpamProcessor());
-
-		// then the same idx and pool will be passed to
-		// the glview callback -
-		// so operate on the image at idx, and modify, and then
-		// it will be drawn in the glview
-		// or remove this, and call glview manually in SpamProcessor
 		cbstack.add(glview.getDrawCallback());
 		
 		mPreview.addCallbackStack(cbstack);
@@ -161,17 +194,30 @@ public class Marker extends Activity{
 			if (!markerdir.exists())
 				markerdir.mkdir();
 			
-			File markerFile = new File(markerdir, "ImageMarker"
-					+ new Date().getTime() + ".jpg");
-			armsk.saveMarker(idx,pool,markerFile.getAbsolutePath());
+			String filePath = "ImageMarker"+ new Date().getTime() + ".jpg";
+			File markerFile = new File(markerdir, filePath);
+			//armsk.saveMarker(idx,pool,markerFile.getAbsolutePath());
 			
-			markerPath = markerFile.getAbsolutePath();
-			finish();
-
+			File evaldir = new File(markerdir, "MarkerEvaluations");
+			if (!evaldir.exists())
+				evaldir.mkdir();
+			
+			File evalFile = new File(evaldir, filePath);
+			//armsk.findFeatures(markerFile.getAbsolutePath(),evalFile.getAbsolutePath());
+			
+			Bundle bundle = new Bundle();
+	    	bundle.putString("filename", markerFile.getName());
+	    	Intent mIntent = new Intent();
+	    	mIntent.putExtras(bundle);
+	    	setResult(RESULT_OK, mIntent);
+	    	finish();
+			
 			}
 		}
 
 	}
+	
+	
 
 }
 

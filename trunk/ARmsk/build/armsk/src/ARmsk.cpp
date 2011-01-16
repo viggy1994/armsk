@@ -1,3 +1,19 @@
+/*
+ * Copyright 2010, 2011 Project ARmsk
+ * 
+ * This file is part of ARmsk.
+ * ARmsk is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * ARmsk is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with ARmsk.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 
 #include "../include/ARmsk.h"
 
@@ -58,30 +74,108 @@ namespace ARmsk
 			dstPoints.push_back(transformedPoints.at<Point2f> (i, 0));
 	}
 	
-	void estimatePose(vector<Point3d> &objectPoints, vector<Point2f> &imagePoints, double (&_dc)[5], double (&_cm)[9], double (&_d)[9], Mat &rvec, Mat &tvec, Vec3d &eav){
+	void prepareValuesForPoseEstimation(IMAGEDATA templateImage, Mat homography, vector<Point3d> &modelPoints, vector<Point2f> &imagePoints, Point2f &centerPoint ){
 		
-		Mat distC = Mat(1,4,CV_64FC1,_dc);
-		Mat camMatrix = Mat(3,3,CV_64FC1,_cm);
+		float height = templateImage.image.rows;
+		float width = templateImage.image.cols;
+		
+		modelPoints.clear();
+		modelPoints.push_back(Point3d(0.0, 0.0, 0.0));
+		modelPoints.push_back(Point3d(height, 0.0, 0.0));
+		modelPoints.push_back(Point3d(height, height, 0.0));
+		modelPoints.push_back(Point3d(0.0, height, 0.0));
+		
+		vector<Point2f> squareCorners;
+		squareCorners.push_back(Point2f(((width / 2.0f) - (height / 2.0f)), 0.0f));
+		squareCorners.push_back(Point2f(((width / 2.0f) + (height / 2.0f)), 0.0f));
+		squareCorners.push_back(Point2f(((width / 2.0f) + (height / 2.0f)), height));
+		squareCorners.push_back(Point2f(((width / 2.0f) - (height / 2.0f)), height));
+		
+		imagePoints.clear();
+		transformPoints(homography, squareCorners, imagePoints);
+		
+		vector<Point2f> centerPointTemplate;
+		vector<Point2f> temp;
+		centerPointTemplate.push_back(Point2f(width/2.0f, height/2.0f));
+		transformPoints(homography, centerPointTemplate, temp);
+		
+		centerPoint = temp[0];
+		
+	}	
+	void estimatePose(vector<Point3d> modelPoints, vector<Point2f> imagePoints, Point2f centerPoint, double (cameraMatrix)[16], double (&resultMatrix)[16] ){
+		
+		Mat rvec, tvec, rMat;
+		
+		double rot[9] = { 0 };
+		vector<double> rv(3), tv(3);
+		
+		rvec = Mat(rv);
+		
+		double _d[9] = { 1, 0, 0, 0, -1, 0, 0, 0, -1 };
 		
 		
-		Mat _objectPoints;
-		Mat(objectPoints).convertTo(_objectPoints,CV_64F);
+		Rodrigues(Mat(3, 3, CV_64FC1, _d), rvec);
 		
-		Mat rotM(3,3,CV_64FC1,_d);
-		Rodrigues(rotM,rvec);
+		tv[0] = 0;
+		tv[1] = 0;
+		tv[2] = 1;
 		
-		solvePnP(_objectPoints,Mat(imagePoints),camMatrix,distC,rvec,tvec,true);
+		tvec = Mat(tv);
 		
-		Rodrigues(rvec,rotM);
 		
-		double _pm[12] = {_d[0], _d[1], _d[2], 0,
-			_d[3], _d[4], _d[5],  0,
-			_d[6], _d[7], _d[8], 0};
+		// Camera matrix
+		double _cm[9] = { 3.1810194786433851e+02, 0., 2.0127743042733985e+02, 0.,
+			3.1880182087777166e+02, 1.2606640793496385e+02, 0., 0., 1 };
 		
-		Mat tmp, tmp2, tmp3, tmp4, tmp5, tmp6;
-		decomposeProjectionMatrix(Mat(3, 4, CV_64FC1, _pm),tmp, tmp2, tmp3, tmp4, tmp5, tmp6, eav);
+		// Distortion coefficients
+		double _dc[] = { 0, 0, 0, 0 };
 		
+		
+		Mat camMatrix = Mat(3, 3, CV_64FC1, _cm);
+		
+		solvePnP(Mat(modelPoints), Mat(imagePoints), camMatrix, Mat(1, 4,
+																	CV_64FC1, _dc), rvec, tvec, true);
+		
+		
+		rMat = Mat(3, 3, CV_64FC1, rot);
+		
+		Rodrigues(rvec, rMat);
+		
+		tvec.at<double> (0, 0) += 2.0127743042733985e+02 + 4.69099e-02;
+		tvec.at<double> (1, 0) += 1.2606640793496385e+02 - 2.5968e-02;
+		tvec.at<double> (2, 0) -= 3.1810194786433851e+02 + 2.31789e-01;
+		
+		
+		
+		resultMatrix[0] = rMat.at<double> (0, 0);//*scale;
+		resultMatrix[1] = -rMat.at<double> (1, 0);
+		resultMatrix[2] = -rMat.at<double> (2, 0);
+		resultMatrix[3] = 0;
+		resultMatrix[4] = rMat.at<double> (0, 1);
+		resultMatrix[5] = -rMat.at<double> (1, 1);//*scale;
+		resultMatrix[6] = -rMat.at<double> (2, 1);
+		resultMatrix[7] = 0;
+		resultMatrix[8] = rMat.at<double> (0, 2);
+		resultMatrix[9] = -rMat.at<double> (1, 2);
+		resultMatrix[10] = -rMat.at<double> (2, 2);//*scale;
+		resultMatrix[11] = 0;
+		resultMatrix[12] = 4.0f*(4.0f/3.0f)*(5.0f/3.0f)*(centerPoint.x - 200)/400;
+		resultMatrix[13] = -4.0f*(4.0f/3.0f)*1.0f*(centerPoint.y - 120)/240;
+		resultMatrix[14] = -4.0f;
+		resultMatrix[15] = 1.0f;
+		
+	}	
+	
+	float calculateScale(vector<Point2f> imagePoints, float squareSize){
+		vector<float> hypotenuse;
+		hypotenuse.push_back(sqrt((imagePoints[1].x - imagePoints[0].x)*(imagePoints[1].x - imagePoints[0].x) + (imagePoints[1].y - imagePoints[0].y)*(imagePoints[1].y - imagePoints[0].y)));
+		hypotenuse.push_back(sqrt((imagePoints[2].x - imagePoints[1].x)*(imagePoints[2].x - imagePoints[1].x) + (imagePoints[2].y - imagePoints[1].y)*(imagePoints[2].y - imagePoints[1].y)));
+		hypotenuse.push_back(sqrt((imagePoints[3].x - imagePoints[2].x)*(imagePoints[3].x - imagePoints[2].x) + (imagePoints[3].y - imagePoints[2].y)*(imagePoints[3].y - imagePoints[2].y)));
+		hypotenuse.push_back(sqrt((imagePoints[0].x - imagePoints[3].x)*(imagePoints[0].x - imagePoints[3].x) + (imagePoints[0].y - imagePoints[3].y)*(imagePoints[0].y - imagePoints[3].y)));
+		sort (hypotenuse.begin(),hypotenuse.end());
+		return hypotenuse[3]/squareSize;
 	}
+	
 	
 	void convertToPoints(IMAGEDATA &input, vector<Point2f> &points){
 		KeyPoint::convert(input.keypoints, points, input.validIndexes);
