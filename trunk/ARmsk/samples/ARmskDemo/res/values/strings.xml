@@ -22,9 +22,11 @@
 	<string name="about_text">ARmsk Demo is an application developed to demonstrate the ARmsk API.	</string>
 	
 	<string name="add_marker_help_text">How to add a good marker: 
-										\nFirst you need a a good 2D symbol/picture or pattern.
-										\nThe more features there are in the picture the better the marker. 
-										\nMany edges and high contrast result in larger amounts features. </string>
+										\n* First you need a a good 2D symbol/picture or pattern. 
+										\n* The more features there are in the picture the better the marker. Many edges and high contrast result in larger amounts features.
+										\n* Aim at the pattern from straight above and press the menu-button and then on Add Marker.
+										\n\nHow to start Augmented Reality:  
+										\n* Aim at your marker, press the menu-button and then on Start AR.</string>
 										
 	<string name="markerManagementWeclome">Welcome to the Marker Manager</string> 
 	<string name="markerManagementText">First you need to load a image marker for the application to use. You can choose to take a picture with the camera or load a image from the sdcard.</string>									
