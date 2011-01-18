@@ -103,7 +103,7 @@ void Native::processAR(int input_idx, image_pool* pool) {
 	prepareValuesForPoseEstimation(train, HMatrix, modelPoints, imagePoints, centerPoint);
 	estimatePose(modelPoints,imagePoints,centerPoint,cameraMatrix, transformationMatrix);
 
-	scale = calculateScale(imagePoints, 240.0f);
+	scale = calculateScale(imagePoints, train.image.rows);
 
 	}
 
