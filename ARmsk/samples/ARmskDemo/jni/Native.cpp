@@ -17,8 +17,6 @@
 
 #include "Native.h"
 
-bool templateInitiated = false;
-
 Native::Native() :
 
 	surfd(400/*hessian_threshold*/, 3/*octaves*/, 4/*octave_layers*/),
@@ -161,7 +159,6 @@ void Native::setMarker(int input_idx, image_pool* pool) {
 	computeDescriptors(train, descriptorExtractor);
 
 	initCorners(train, src_corners);
-	templateInitiated = true;
 }
 
 void Native::setMarker(const char * filePath) {
@@ -174,7 +171,6 @@ void Native::setMarker(const char * filePath) {
 	computeDescriptors(train, descriptorExtractor);
 
 	initCorners(train, src_corners);
-	templateInitiated = true;
 }
 
 /*This method will be changed to take a array reference input for better performance*/
