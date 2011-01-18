@@ -36,10 +36,5 @@
 			<type>2</type>
 			<locationURI>_android_ARmskShared/src</locationURI>
 		</link>
-		<link>
-			<name>OpenCV</name>
-			<type>2</type>
-			<locationURI>_android_OpenCV/src</locationURI>
-		</link>
 	</linkedResources>
 </projectDescription>
