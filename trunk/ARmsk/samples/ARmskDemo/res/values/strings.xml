@@ -1,44 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">ARmsk Demo</string>
-	<string name="main_title">ARmsk Demo</string>
-	
-	<!-- Buttons -->
-	<string name="start_armsk">Start AR</string>
-	<string name="choose_marker">Marker management</string>
-	<string name="instructions_label">Instructions</string>
-	<string name="exit_label">Exit</string>
-
-	<string name="fromFile">Load from file</string>
-	<string name="newMarker">New marker from camera</string>
-	<string name="useMarker">Use</string>
-	<string name="editMarker">Edit</string>
-	<string name="deleteMarker">Delete this marker</string>
-	
-
-	<string name="about_title">About Android Sudoku</string>
-	
+			
 	<!-- Text Content -->
-	<string name="about_text">ARmsk Demo is an application developed to demonstrate the ARmsk API.	</string>
-	
 	<string name="add_marker_help_text">How to add a good marker: 
 										\n* First you need a a good 2D symbol/picture or pattern. 
 										\n* The more features there are in the picture the better the marker. Many edges and high contrast result in larger amounts features.
 										\n* Aim at the pattern from straight above and press the menu-button and then on Add Marker.
 										\n\nHow to start Augmented Reality:  
 										\n* Aim at your marker, press the menu-button and then on Start AR.</string>
-										
-	<string name="markerManagementWeclome">Welcome to the Marker Manager</string> 
-	<string name="markerManagementText">First you need to load a image marker for the application to use. You can choose to take a picture with the camera or load a image from the sdcard.</string>									
-	
-	<string name="LoadMarkerTitle">Welcome to the Marker Manager</string> 
-	<string name="LoadMarkerText">First you need to load a image marker for the application to use. You can choose to take a picture with the camera or load a image from the sdcard.</string>									
-	
-	<string name="infoFilename">Filename: N/A</string>
-	<string name="infoNumberOfFeatures">Number of features: N/A</string>
-	<string name="infoDetectionMethod">Detection method: SURF</string>
-	<string name="infoFeatureDistribuition">Feature distribution: N/A</string>
-	<string name="infoMarkerRating"></string>
-	
-	
+											
 </resources>
